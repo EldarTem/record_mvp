@@ -1,0 +1,192 @@
+:root {
+  font-family: "Montserrat", system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #4d4e4f;
+  background-color: #efefef;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Brand */
+  --brand-orange: #ff552e;
+  --brand-orange-hover: #e84b28;
+  --brand-text: #3d3d3d;
+  --brand-muted: #8a8a8a;
+  --brand-border: #e6e6e6;
+  --brand-placeholder: #b0b0b0;
+
+  /* Element Plus — primary (replaces default blue) */
+  --el-color-primary: #ff552e;
+  --el-color-primary-light-3: #ff886d;
+  --el-color-primary-light-5: #ffaa96;
+  --el-color-primary-light-7: #ffccc0;
+  --el-color-primary-light-8: #ffddd5;
+  --el-color-primary-light-9: #ffeee9;
+  --el-color-primary-dark-2: #cc4425;
+
+  --el-border-radius-base: 8px;
+  --el-border-radius-small: 6px;
+  --el-border-radius-round: 20px;
+  --el-font-size-base: 15px;
+  --el-text-color-primary: #3d3d3d;
+  --el-text-color-regular: #3d3d3d;
+  --el-text-color-placeholder: #b0b0b0;
+  --el-border-color: #e6e6e6;
+  --el-border-color-hover: #ff552e;
+  --el-color-primary-rgb: 255, 85, 46;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+a {
+  font-weight: 500;
+  color: var(--brand-orange);
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: var(--brand-orange-hover);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+#app {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  min-height: 100vh;
+}
+
+/* ——— Global form controls (match auth pages) ——— */
+
+.el-input__wrapper,
+.el-select__wrapper,
+.el-textarea__inner {
+  border-radius: 8px !important;
+  background: #fff !important;
+}
+
+.el-input__wrapper,
+.el-select__wrapper {
+  box-shadow: 0 0 0 1px var(--brand-border) inset !important;
+  padding: 4px 12px !important;
+  min-height: 44px !important;
+}
+
+.el-input__wrapper.is-focus,
+.el-input__wrapper.is-focused,
+.el-select__wrapper.is-focused {
+  box-shadow: 0 0 0 1px var(--brand-orange) inset !important;
+}
+
+.el-select__wrapper.is-hovering:not(.is-focused) {
+  box-shadow: 0 0 0 1px #d0d0d0 inset !important;
+}
+
+.el-input__wrapper:hover:not(.is-focus):not(.is-focused) {
+  box-shadow: 0 0 0 1px #d0d0d0 inset !important;
+}
+
+.el-input__inner,
+.el-select__placeholder,
+.el-select__selected-item {
+  color: var(--brand-text);
+  font-size: 15px;
+}
+
+.el-input__inner::placeholder,
+.el-textarea__inner::placeholder {
+  color: var(--brand-placeholder);
+}
+
+.el-textarea__inner {
+  box-shadow: 0 0 0 1px var(--brand-border) inset !important;
+  padding: 10px 12px !important;
+  min-height: 88px;
+  color: var(--brand-text);
+  font-size: 15px;
+}
+
+.el-textarea__inner:hover {
+  box-shadow: 0 0 0 1px #d0d0d0 inset !important;
+}
+
+.el-textarea__inner:focus {
+  box-shadow: 0 0 0 1px var(--brand-orange) inset !important;
+}
+
+.el-date-editor.el-input,
+.el-date-editor.el-input__wrapper,
+.el-date-editor.el-input .el-input__wrapper,
+.el-time-picker .el-input__wrapper {
+  width: 100%;
+}
+
+.el-form-item__label {
+  color: var(--brand-text) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner,
+.el-radio__input.is-checked .el-radio__inner {
+  background-color: var(--brand-orange) !important;
+  border-color: var(--brand-orange) !important;
+}
+
+.el-checkbox__input.is-checked + .el-checkbox__label,
+.el-radio__input.is-checked + .el-radio__label {
+  color: var(--brand-text) !important;
+}
+
+.el-switch.is-checked .el-switch__core {
+  background-color: var(--brand-orange) !important;
+  border-color: var(--brand-orange) !important;
+}
+
+.el-button--primary {
+  --el-button-bg-color: var(--brand-orange);
+  --el-button-border-color: var(--brand-orange);
+  --el-button-hover-bg-color: var(--brand-orange-hover);
+  --el-button-hover-border-color: var(--brand-orange-hover);
+  --el-button-active-bg-color: var(--brand-orange-hover);
+  --el-button-active-border-color: var(--brand-orange-hover);
+}
+
+.el-pager li.is-active {
+  background-color: var(--brand-orange) !important;
+  color: #fff !important;
+}
+
+.el-pagination button:hover,
+.el-pager li:hover {
+  color: var(--brand-orange) !important;
+}
+
+.el-loading-spinner .path {
+  stroke: var(--brand-orange) !important;
+}
+
+.el-loading-spinner .el-loading-text {
+  color: var(--brand-orange) !important;
+}
