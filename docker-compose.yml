@@ -1,0 +1,16 @@
+services:
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: record_front
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    networks:
+      - record_net
+
+networks:
+  record_net:
+    name: records_project_default
+    external: true
