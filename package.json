@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
+    "build:docker": "vite build",
     "preview": "vite preview",
     "test": "vitest",
     "mock:server": "json-server --watch db.json --port 3001"
