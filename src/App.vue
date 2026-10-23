@@ -26,11 +26,17 @@ html,
   font-family: "Montserrat", sans-serif;
   height: 100%;
   margin: 0;
-  background-color: #efefef;
+  background-color: #ff9a62;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   color: #4d4e4f;
+}
+
+/* After splash, main app shell uses the usual light surface */
+body.app-ready,
+body.app-ready #app {
+  background-color: #efefef;
 }
 
 .el-container {

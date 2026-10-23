@@ -33,8 +33,29 @@ const pinia = createPinia();
 app.use(pinia);
 
 import { useAuthStore } from '@/store/useAuthStore';
+
+const splashShownAt = performance.now();
+const SPLASH_MIN_MS = 900;
+
+function hideSplash() {
+  const splash = document.getElementById('app-splash');
+  if (!splash) return;
+
+  const wait = Math.max(0, SPLASH_MIN_MS - (performance.now() - splashShownAt));
+  window.setTimeout(() => {
+    splash.classList.add('is-hiding');
+    window.setTimeout(() => {
+      splash.remove();
+      document.body.classList.add('app-ready');
+    }, 480);
+  }, wait);
+}
+
 const authStore = useAuthStore();
 authStore.tryRestore().finally(() => {
   app.use(router);
   app.mount('#app');
+  requestAnimationFrame(() => {
+    requestAnimationFrame(hideSplash);
+  });
 });

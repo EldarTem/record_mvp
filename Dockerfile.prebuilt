@@ -1,0 +1,13 @@
+# Use when the VPS is too small to run vite build.
+# On a normal machine first:
+#   cd record_mvp && npm ci && npm run build:docker
+# Then:
+#   docker compose build front
+FROM nginx:1.27-alpine
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

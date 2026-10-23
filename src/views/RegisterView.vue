@@ -12,82 +12,31 @@
         label-position="top"
         @submit.prevent="handleRegister"
       >
-        <el-row :gutter="12">
-          <el-col :xs="24" :sm="8">
-            <el-form-item label="Фамилия" prop="surname">
-              <el-input
-                v-model="registerForm.surname"
-                placeholder="Иванов"
-                clearable
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :xs="24" :sm="8">
-            <el-form-item label="Имя" prop="name">
-              <el-input
-                v-model="registerForm.name"
-                placeholder="Иван"
-                clearable
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :xs="24" :sm="8">
-            <el-form-item label="Отчество" prop="patronymic">
-              <el-input
-                v-model="registerForm.patronymic"
-                placeholder="Иванович"
-                clearable
-              />
-            </el-form-item>
-          </el-col>
-        </el-row>
+        <el-form-item label="Имя и фамилия" prop="name">
+          <el-input
+            v-model="registerForm.name"
+            placeholder="Иван Иванов"
+            clearable
+          />
+        </el-form-item>
 
-        <el-row :gutter="12">
-          <el-col :xs="24" :sm="12">
-            <el-form-item label="Дата рождения" prop="dateOfBirth">
-              <el-date-picker
-                v-model="registerForm.dateOfBirth"
-                type="date"
-                format="DD/MM/YYYY"
-                value-format="YYYY-MM-DD"
-                placeholder="ДД/ММ/ГГГГ"
-                style="width: 100%"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :xs="24" :sm="12">
-            <el-form-item label="Город" prop="city">
-              <el-input
-                v-model="registerForm.city"
-                placeholder="Москва"
-                clearable
-              />
-            </el-form-item>
-          </el-col>
-        </el-row>
+        <el-form-item label="Электронная почта" prop="email">
+          <el-input
+            v-model="registerForm.email"
+            placeholder="example@gmail.com"
+            clearable
+            @input="onEmailInput"
+          />
+        </el-form-item>
 
-        <el-row :gutter="12">
-          <el-col :xs="24" :sm="12">
-            <el-form-item label="Телефон" prop="phone">
-              <el-input
-                v-model="registerForm.phone"
-                placeholder="+7 (___) ___-__-__"
-                clearable
-                @input="onPhoneInput"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :xs="24" :sm="12">
-            <el-form-item label="Электронная почта" prop="email">
-              <el-input
-                v-model="registerForm.email"
-                placeholder="example@gmail.com"
-                clearable
-                @input="onEmailInput"
-              />
-            </el-form-item>
-          </el-col>
-        </el-row>
+        <el-form-item label="Телефон (необязательно)" prop="phone">
+          <el-input
+            v-model="registerForm.phone"
+            placeholder="+7 (___) ___-__-__"
+            clearable
+            @input="onPhoneInput"
+          />
+        </el-form-item>
 
         <el-form-item label="Пароль" prop="password">
           <el-input
@@ -103,46 +52,6 @@
             </template>
           </el-input>
         </el-form-item>
-
-        <el-form-item label="Вид документа" prop="documentType">
-          <el-select
-            v-model="registerForm.documentType"
-            placeholder="Выберите тип"
-            style="width: 100%"
-          >
-            <el-option label="Паспорт РФ" value="passport_ru" />
-            <el-option label="Загранпаспорт" value="passport_int" />
-            <el-option
-              label="Водительское удостоверение"
-              value="driver_license"
-            />
-          </el-select>
-        </el-form-item>
-
-        <el-row :gutter="12">
-          <el-col :xs="24" :sm="12">
-            <el-form-item label="Серия" prop="passportSeries">
-              <el-input
-                v-model="registerForm.passportSeries"
-                placeholder="____"
-                maxlength="4"
-                clearable
-                @input="onSeriesInput"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :xs="24" :sm="12">
-            <el-form-item label="Номер" prop="passportNumber">
-              <el-input
-                ref="passportNumberRef"
-                v-model="registerForm.passportNumber"
-                placeholder="______"
-                maxlength="6"
-                clearable
-              />
-            </el-form-item>
-          </el-col>
-        </el-row>
 
         <el-form-item prop="consent" class="register-form__consent">
           <el-checkbox v-model="registerForm.consent">
@@ -171,7 +80,7 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, reactive, ref } from "vue";
+import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/store/useAuthStore";
 import { View, Hide } from "@element-plus/icons-vue";
@@ -182,37 +91,16 @@ const authStore = useAuthStore();
 const router = useRouter();
 const registerFormRef = ref<FormInstance>();
 const registerForm = reactive({
-  surname: "",
   name: "",
-  patronymic: "",
-  dateOfBirth: "",
-  city: "",
   phone: "",
   email: "",
   password: "",
-  documentType: "",
-  passportSeries: "",
-  passportNumber: "",
   consent: false,
 });
 const passwordVisible = ref(false);
-const passportNumberRef = ref<{ focus: () => void }>();
 
 const rules: FormRules = {
-  surname: [{ required: true, message: "Введите фамилию", trigger: "blur" }],
   name: [{ required: true, message: "Введите имя", trigger: "blur" }],
-  patronymic: [
-    { required: true, message: "Введите отчество", trigger: "blur" },
-  ],
-  dateOfBirth: [
-    {
-      required: true,
-      message: "Выберите дату рождения",
-      trigger: "change",
-    },
-  ],
-  city: [{ required: true, message: "Укажите город", trigger: "blur" }],
-  phone: [{ required: true, message: "Введите телефон", trigger: "blur" }],
   email: [
     { required: true, message: "Введите email", trigger: "blur" },
     {
@@ -222,37 +110,6 @@ const rules: FormRules = {
     },
   ],
   password: [{ required: true, message: "Введите пароль", trigger: "blur" }],
-  documentType: [
-    {
-      required: true,
-      message: "Выберите тип документа",
-      trigger: "change",
-    },
-  ],
-  passportSeries: [
-    {
-      required: true,
-      message: "Введите серию паспорта",
-      trigger: "blur",
-    },
-    {
-      pattern: /^\d{4}$/,
-      message: "Серия должна быть из 4 цифр",
-      trigger: "blur",
-    },
-  ],
-  passportNumber: [
-    {
-      required: true,
-      message: "Введите номер паспорта",
-      trigger: "blur",
-    },
-    {
-      pattern: /^\d{6}$/,
-      message: "Номер должен быть из 6 цифр",
-      trigger: "blur",
-    },
-  ],
   consent: [
     {
       validator: (_: unknown, value: boolean, cb: (e?: Error) => void) => {
@@ -287,14 +144,9 @@ const formatPhone = (value: string): string => {
 };
 
 const onPhoneInput = () => {
-  registerForm.phone = formatPhone(registerForm.phone);
-};
-
-const onSeriesInput = async () => {
-  if (registerForm.passportSeries.replace(/\D/g, "").length === 4) {
-    await nextTick();
-    passportNumberRef.value?.focus();
-  }
+  registerForm.phone = registerForm.phone
+    ? formatPhone(registerForm.phone)
+    : "";
 };
 
 const handleRegister = () => {
@@ -305,11 +157,12 @@ const handleRegister = () => {
       background: "rgba(0,0,0,0.3)",
     });
     try {
+      const phoneDigits = registerForm.phone.replace(/\D/g, "");
       const ok = await authStore.signup({
-        name: `${registerForm.surname} ${registerForm.name} ${registerForm.patronymic}`,
+        name: registerForm.name.trim(),
         email: registerForm.email.trim(),
         password: registerForm.password.trim(),
-        phone: registerForm.phone,
+        ...(phoneDigits.length === 11 ? { phone: `+${phoneDigits}` } : {}),
       });
       if (ok) {
         router.push("/records");
